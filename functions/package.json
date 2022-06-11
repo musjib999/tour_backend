@@ -7,7 +7,9 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "kill-port": "npx kill-port 8081 && npx kill-port 5000 && npx kill-port 5001 && npx kill-port 3002 && npx kill-port 9000 && npx kill-port 8085 && npx kill-port 9199 && clear && say 'Killed all ports' && npm run debug",
+    "debug": "clear && say 'Starting debug builds' && npm run build -- --watch | firebase emulators:start"
   },
   "engines": {
     "node": "16"

@@ -1,3 +1,3 @@
 # Tourism Api
 
-## Get to know all places people visited around the world 😀
+## Get to know all the places people visited around the world 😀

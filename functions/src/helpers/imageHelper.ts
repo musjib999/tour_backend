@@ -1,19 +1,10 @@
-import Jimp from "jimp/*";
-import { print } from "../settings";
+import Jimp from "jimp";
+import { uploadToTempDir } from "./uploadHelper";
 
-const jimp = require("jimp");
-// const Jimp = require("jimp");
-
-export const reduceImageQuality = async (imagePath: string, id: string, ext: string, quality: number): Promise<string> => {
-  let path: string = '';
-  await jimp.read(imagePath).then((image: any) => {
-    const uploadPath: string = `uploads/${id}.${ext}`;
-    image.quality(quality).writeAsync(__dirname.split('/functions')[0] + '/functions/' + uploadPath).then((value: Jimp) => {
-      path = __dirname.split('/functions')[0] + '/functions/' + uploadPath;
-      print(value.toString());
-     
-    });
-    path = __dirname.split('/functions')[0] + '/functions/' + uploadPath;
+export const reduceImageSize = async (imagePath: string, id: string, ext: string, size: number): Promise<string> => {
+  let tmpFilePath = uploadToTempDir(id, ext, size);
+  await Jimp.read(imagePath).then((image) => {
+    image.resize(size, size).writeAsync(tmpFilePath);  
   });
-  return path;
+  return tmpFilePath;
 }

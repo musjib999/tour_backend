@@ -1,10 +1,10 @@
 import Jimp from "jimp";
-import { uploadToTempDir } from "./uploadHelper";
+import { print } from "../settings";
 
-export const reduceImageSize = async (imagePath: string, id: string, ext: string, size: number): Promise<string> => {
-  let tmpFilePath = uploadToTempDir(id, ext, size);
+export const reduceImageSize = async (imagePath: string, name: string, ext: string, size: number): Promise<string> => {
   await Jimp.read(imagePath).then((image) => {
-    image.resize(size, size).writeAsync(tmpFilePath);  
+    image.resize(size, size).writeAsync(imagePath);  
   });
-  return tmpFilePath;
+  print(`[reduceImageSize] >> ${imagePath}`);
+  return imagePath;
 }

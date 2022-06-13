@@ -1,6 +1,6 @@
 import { baseUrl, bucket } from "../../settings";
 
-export const uploadImage = async (filePath: string, destination: string, id: string): Promise<string | undefined> => {
+export const uploadImage = async (filePath: string, destination: string, meta: {}, id: string): Promise<string | undefined> => {
     let imageUrl: string = '';
     try {
         await bucket.upload(filePath, {
@@ -9,6 +9,7 @@ export const uploadImage = async (filePath: string, destination: string, id: str
                 cacheControl: 'public,max-age=300',
                 metadata: {
                     firebaseStorageDownloadTokens: id,
+                    imageInfo: meta,
                 },
             },
         }).then((value) => {

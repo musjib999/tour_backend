@@ -1,4 +1,4 @@
-import { baseUrl, bucket } from "../../settings";
+import { baseUrl, bucket, print } from "../../settings";
 
 export const uploadImage = async (filePath: string, destination: string, meta: {}, id: string): Promise<string | undefined> => {
     let imageUrl: string = '';
@@ -14,10 +14,9 @@ export const uploadImage = async (filePath: string, destination: string, meta: {
             },
         }).then((value) => {
             imageUrl = `${baseUrl}/${bucket.name}/o/${value[0].id}?alt=media&token=${id}`;
-            console.log(imageUrl);
         });
     } catch (error) {
-        console.log(error);
+       print(`[uploadImage] Error >>> ${error}`);
     }
     return imageUrl;
 }

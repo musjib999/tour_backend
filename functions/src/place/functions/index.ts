@@ -1,1 +1,2 @@
-export * from './createPlace'
+export * from "./createPlace"
+export * from "./fetchPlace"
